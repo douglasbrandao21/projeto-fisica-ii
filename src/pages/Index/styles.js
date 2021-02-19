@@ -24,11 +24,35 @@ export const Body = styled.div`
   background: #1D2D4B;
   color: #eee;
   padding: 30px 30px;
-  height: calc(100vh - 112px);
+  min-height: calc(100vh - 100px);
+  height: 100%;
   margin-top: -20px;
 `;
 
-export const Section = styled.section``;
+export const Section = styled.section`
+  width: 100%;
+`;
+
+export const Button = styled.button`
+  padding: 10px 35px;
+  background: #72AAFF;
+  color: #1C223A;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+  margin: 20px auto;
+`;
+
+export const Step = styled.div`
+  margin-top: 30px;
+  background: #192741;
+  border-radius: 8px;
+  padding: 30px;
+  h4{
+    margin: 0;
+  }
+
+`;
 
 export const Label = styled.span`
   position: absolute;
