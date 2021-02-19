@@ -45,6 +45,16 @@ export default function Index() {
     setDone(true);
   }
 
+  function clear(){
+    setC1Value(8.4);
+    setC2Value(4.2);
+    setC3Value(4.2);
+    setC4Value(4.2);
+    setC5Value(8.4);
+    setVoltage((220));
+    setDone(false);
+  }
+
   return (
     <Page>
 
@@ -55,28 +65,22 @@ export default function Index() {
 
       <Body>
         <Section>
-          <h3>1. Determine a entrada dos capacitores: </h3>
+          <h3>1. Determine a entrada dos capacitores e voltagem: </h3>
           <FlexRow>
             <CapacitorInput name="(C1) - Capacitor 1" value={c1Value} setValue={setC1Value} />
             <CapacitorInput name="(C2) - Capacitor 2" value={c2Value} setValue={setC2Value} />
             <CapacitorInput name="(C3) - Capacitor 3" value={c3Value} setValue={setC3Value} />
             <CapacitorInput name="(C4) - Capacitor 4" value={c4Value} setValue={setC4Value} />
             <CapacitorInput name="(C5) - Capacitor 5" value={c5Value} setValue={setC5Value} />
-          </FlexRow>
-        </Section>
-
-        <Section>
-          <h3>2. Voltagem: </h3>
-          <FlexRow>
             <CapacitorInput name="Voltagem" value={voltage} setValue={setVoltage} max={220} min={0} />
+
+            <Section flex>
+              <Button onClick={() => clear()} reset>Resetar</Button>
+              <Button onClick={() => doSomething()}>Calcular</Button>
+            </Section>
+
           </FlexRow>
         </Section>
-
-        {!isDone ? (
-          <Section>
-            <Button onClick={() => doSomething()}>Calcular</Button>
-          </Section>
-        ) : null }
 
 
         {isDone ? ( 

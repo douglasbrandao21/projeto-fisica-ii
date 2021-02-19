@@ -31,16 +31,20 @@ export const Body = styled.div`
 
 export const Section = styled.section`
   width: 100%;
+  display: ${props => props.flex ? 'flex' : 'block'};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Button = styled.button`
   padding: 10px 35px;
-  background: #72AAFF;
-  color: #1C223A;
+  background: ${props => props.reset ? '#E43F5A' : '#72AAFF'};
+  color: ${props => props.reset ? '#FFFFFF' : '#1C223A'};
   font-weight: bold;
   border: none;
   border-radius: 2px;
-  margin: 20px auto;
+  margin: 0px 10px;
+  outline: none;
 `;
 
 export const Step = styled.div`
@@ -63,6 +67,7 @@ export const Label = styled.span`
 export const FlexRow = styled.div`
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
   padding: 50px 30px;

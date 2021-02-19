@@ -4,7 +4,8 @@ export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin: 0 20px;
+  min-width: 33%;
+  margin: 0px 20px 30px 20px;
 `;
 
 export const Name = styled.h4`
