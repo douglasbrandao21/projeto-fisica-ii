@@ -81,7 +81,7 @@ export default function Index() {
 
         {isDone ? ( 
           <>
-            <h2>Resolução: </h2>
+            <h2>Resolução Questão 1: </h2>
             <Step>
               <h4>1. Temos o seguinte circuito:</h4>
               <p>C1 = {c1Value}; C2 = {c2Value}; C3 = {c3Value}; C4 = {c4Value}; C5 = {c5Value};</p>
