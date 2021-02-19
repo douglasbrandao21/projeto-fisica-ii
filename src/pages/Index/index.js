@@ -35,7 +35,7 @@ export default function Index() {
 
   return (
     <Page>
-      
+
       <Header>
         <h1>Física II - Exercicio 4</h1>
         <span>Gustavo Villar, Gabriel H S Gava, Douglas Brandão e Felipe Borsato</span>
@@ -56,7 +56,7 @@ export default function Index() {
         <Section>
           <h3>2. Voltagem: </h3>
           <FlexRow>
-            <CapacitorInput name="Voltagem" value={voltage} setValue={setVoltage} />
+            <CapacitorInput name="Voltagem" value={voltage} setValue={setVoltage} max={220} min={0} />
           </FlexRow>
         </Section>
 
