@@ -47,9 +47,9 @@ export default function Index() {
     const equivalentCapacitor3 = ((C1 * C5 * equivalentCapacitor2) / ((C5 * equivalentCapacitor2) + (C1 * equivalentCapacitor2) + (C1 * C5)));
 
     return {
-      equivalentCapacitor1,
-      equivalentCapacitor2,
-      equivalentCapacitor3
+      equivalentCapacitor1: equivalentCapacitor1.toFixed(2),
+      equivalentCapacitor2: equivalentCapacitor2.toFixed(2),
+      equivalentCapacitor3: equivalentCapacitor3.toFixed(2)
     }
   }
 
@@ -70,39 +70,46 @@ export default function Index() {
     const { equivalentCapacitor1, equivalentCapacitor2, equivalentCapacitor3 } = calculateEquivalentCapacitors();
 
     // Para saber a carga em cada capacitor é preciso saber a equivalente:
-    const equivalentCharge2 = equivalentCapacitor3 * voltage;
+    const equivalentCharge2 = (equivalentCapacitor3 * voltage).toFixed(2);
 
     // Como C1, C5 e Ceq2 estão em série seus valores de carga são:
     const capacitor1Charge = equivalentCharge2;
     const capacitor5Charge = equivalentCharge2;
 
     // Mas suas voltagens são diferentes, logo:
-    const equivalentVoltage2 = voltage - (capacitor1Charge / C1) - (capacitor5Charge / C5);
+    const equivalentVoltage2 = (voltage - (capacitor1Charge / C1) - (capacitor5Charge / C5)).toFixed(2);
 
     // Sendo assim a diferença de potencial de C2 é:
     const capacitor2Charge = C2 * equivalentVoltage2;
 
     // Por outro lado Ceq1 tem a mesma diferença de potencial, logo:
     const equivalentVoltage1 = equivalentVoltage2;
-    const equivalentCharge1 = equivalentCapacitor1 * equivalentVoltage1;
+    const equivalentCharge1 = (equivalentCapacitor1 * equivalentVoltage1).toFixed(2);
 
     // Como C3 e C4 estão em série temos:
     const capacitor3Charge = equivalentCharge1;
     const capacitor4Charge = equivalentCharge1;
 
+    // Diferenças de potencial
+    const potentialDifference = [];
+    potentialDifference.push(capacitor1Charge / C1);
+    potentialDifference.push(capacitor2Charge / C2);
+    potentialDifference.push(capacitor3Charge / C3);
+    potentialDifference.push(capacitor4Charge / C4);
+    potentialDifference.push(capacitor5Charge / C5);
+    
+
+    const capacitorsCharges = [capacitor1Charge, capacitor2Charge, capacitor3Charge, capacitor4Charge, capacitor5Charge];
+    const equivalentCharges = [equivalentCharge1, equivalentCharge2];
+    const equivalentVoltages = [equivalentVoltage1, equivalentVoltage2];
+    const equivalentCapacitors = [equivalentCapacitor1, equivalentCapacitor2, equivalentCapacitor3];
+
     setAnswerB({
-      capacitor1Charge: capacitor1Charge.toFixed(2),
-      capacitor2Charge: capacitor2Charge.toFixed(2),
-      capacitor3Charge: capacitor3Charge.toFixed(2),
-      capacitor4Charge: capacitor4Charge.toFixed(2),
-      capacitor5Charge: capacitor5Charge.toFixed(2),
-      equivalentCharge1: equivalentCharge1.toFixed(2),
-      equivalentCharge2: equivalentCharge2.toFixed(2),
-      equivalentVoltage1: equivalentVoltage1.toFixed(2),
-      equivalentVoltage2: equivalentVoltage2.toFixed(2),
-      equivalentCapacitor1: equivalentCapacitor1.toFixed(2),
-      equivalentCapacitor2: equivalentCapacitor2.toFixed(2),
-      equivalentCapacitor3: equivalentCapacitor3.toFixed(2),
+      capacitorsCharges,
+      equivalentCharges,
+      equivalentVoltages,
+      equivalentCapacitors,
+      potentialDifference,
     });
   }
 
@@ -147,14 +154,14 @@ export default function Index() {
             <Step>
               <h4>2. Os capacitores C<sub>3</sub> e C<sub>4</sub> estão em série, logo, sua capacitância equivalente é dada por:</h4>
               <p>C<sub>eq1</sub> = C<sub>3</sub> * C<sub>4</sub> / C<sub>3</sub> + C<sub>4</sub></p>
-              <p>C<sub>eq1</sub> = {answerA.imaginaryCapacitors[0].toFixed(2)} &micro;F</p>
+              <p>C<sub>eq1</sub> = {answerA.imaginaryCapacitors[0]} &micro;F</p>
               <img src={Fig1} alt="Figura 0" height="400px" />
             </Step>
 
             <Step>
               <h4>3. Observe ainda, que C<sub>2</sub> e C<sub>eq1</sub> estão em paralelo. Portanto, sua capacitância equivalente será:</h4>
               <p>C<sub>eq2</sub> = C<sub>eq1</sub> + C<sub>2</sub></p>
-              <p>C<sub>eq2</sub> = {answerA.imaginaryCapacitors[1].toFixed(2)} &micro;F</p>
+              <p>C<sub>eq2</sub> = {answerA.imaginaryCapacitors[1]} &micro;F</p>
               <img src={Fig2} alt="Figura 0" height="400px" />
             </Step>
 
@@ -164,61 +171,87 @@ export default function Index() {
                 C<sub>eq3</sub> = 
                 C<sub>1</sub> * C<sub>5</sub> * C<sub>eq2</sub> / 
                 (C<sub>5</sub> * C<sub>eq2</sub>) + (C<sub>1</sub> * C<sub>eq2</sub>) + (C<sub>1</sub> * C<sub>5</sub>)</p>
-              <p>C<sub>eq3</sub> = {answerA.imaginaryCapacitors[2].toFixed(2)} &micro;F</p>
+              <p>C<sub>eq3</sub> = {answerA.imaginaryCapacitors[2]} &micro;F</p>
               <img src={Fig3} alt="Figura 0" height="200px" />
             </Step>
 
             <h3>a) Qual a capacitância equivalente do circuito entre os pontos a e b?</h3>
-            <h3>{total.toFixed(2)} &micro;F</h3>
+            <h4>{total} &micro;F</h4>
           
             <h2>Resolução do item B: </h2>
 
             <Step>
               <h4>1. Para saber a carga em cada capacitor é preciso saber seus equivalentes</h4>
               <p>Q<sub>eq2</sub> = C<sub>eq2</sub> * V<sub>ab</sub></p>
-              <p>Q<sub>eq2</sub> = {answerB.equivalentCharge2} &micro;C</p>
+              <p>Q<sub>eq2</sub> = {answerB.equivalentCharges[1]} &micro;C</p>
             </Step>
 
             <Step>
               <h4>2. Como C<sub>1</sub>, C<sub>5</sub> e C<sub>eq2</sub> estão em série (conforme apresentado no item A) seus valores de carga são dados por:</h4>
-              <p>Q<sub>1</sub> = Q<sub>5</sub> = Q<sub>eq2</sub> = {answerB.equivalentCharge2} &micro;C</p>
+              <p>Q<sub>1</sub> = Q<sub>5</sub> = Q<sub>eq2</sub> = {answerB.equivalentCharges[1]} &micro;C</p>
             </Step>
 
             <Step>
               <h4>3. Note porém, que suas diferenças de potencial (voltagens) são diferentes. Logo:</h4>
               <p>V<sub>eq2</sub> = V<sub>ab</sub> - Q<sub>1</sub> / C<sub>1</sub>  - Q<sub>5</sub> / C<sub>5</sub></p>
-              <p>V<sub>eq2</sub> = {answerB.equivalentVoltage2} &micro;C</p>
+              <p>V<sub>eq2</sub> = {answerB.equivalentVoltages[1]} &micro;C</p>
             </Step>
 
             <Step>
               <h4>4. Portanto, a diferença de potencial de C<sub>2</sub> será dada por:</h4>
               <p>Q<sub>2</sub> = C<sub>2</sub> * V<sub>eq2</sub></p>
-              <p>Q<sub>2</sub> = {answerB.capacitor2Charge} &micro;C</p>
+              <p>Q<sub>2</sub> = {answerB.capacitorsCharges[1]} &micro;C</p>
             </Step>
 
             <Step>
               <h4>5. Por outro lado, C<sub>eq1</sub> tem a mesma diferença de potencial, sendo dada por:</h4>
               <p>V<sub>eq1</sub> = V<sub>eq2</sub></p>
-              <p>V<sub>eq1</sub> = {answerB.equivalentVoltage2}V</p>
+              <p>V<sub>eq1</sub> = {answerB.equivalentVoltages[1]}V</p>
               <br></br>
               <p>Q<sub>eq1</sub> = C<sub>eq1</sub> * V<sub>eq1</sub></p>
-              <p>Q<sub>eq1</sub> = {answerB.equivalentCharge1} &micro;C</p>
+              <p>Q<sub>eq1</sub> = {answerB.equivalentCharges[0]} &micro;C</p>
             </Step>
 
             <Step>
               <h4>6. Como C<sub>3</sub> e C<sub>4</sub> estão em série, temos que:</h4>
               <p>Q<sub>3</sub> = Q<sub>4</sub> = Q<sub>eq1</sub></p>
-              <p>Q<sub>3</sub> = Q<sub>4</sub> = {answerB.equivalentCharge1} &micro;C</p>
+              <p>Q<sub>3</sub> = Q<sub>4</sub> = {answerB.equivalentCharges[0]} &micro;C</p>
+            </Step>
+
+            <Step>
+              <h4>7. Por fim, temos que a diferencia de potencial de cada capacitor pode ser dada por:</h4>
+              <p>
+                V<sub>1</sub> = Q<sub>1</sub> / C<sub>1</sub> = {answerB.capacitorsCharges[0]}/{C1} = {answerB.potentialDifference[0]}V
+              </p>
+              <p>
+                V<sub>2</sub> = Q<sub>2</sub> / C<sub>2</sub> = {answerB.capacitorsCharges[1]}/{C2} = {answerB.potentialDifference[1]}V
+              </p>
+              <p>
+                V<sub>3</sub> = Q<sub>3</sub> / C<sub>3</sub> = {answerB.capacitorsCharges[2]}/{C3} = {answerB.potentialDifference[2]}V
+              </p>
+              <p>
+                V<sub>4</sub> = Q<sub>4</sub> / C<sub>4</sub> = {answerB.capacitorsCharges[3]}/{C4} = {answerB.potentialDifference[3]}V
+              </p>
+              <p>
+                V<sub>5</sub> = Q<sub>5</sub> / C<sub>5</sub> = {answerB.capacitorsCharges[4]}/{C5} = {answerB.potentialDifference[4]}V
+              </p>
             </Step>
 
             <h3>b) Calcule a carga em cada capacitor e a respectiva diferença de potencial</h3>
-            <h3>
-              Q1 = {answerB.capacitor1Charge} &micro;C |
-              Q2 = {answerB.capacitor2Charge} &micro;C |
-              Q3 = {answerB.capacitor3Charge} &micro;C |
-              Q4 = {answerB.capacitor4Charge} &micro;C |
-              Q5 = {answerB.capacitor5Charge} &micro;C
-            </h3>
+            <h4>
+              Q1 = {answerB.capacitorsCharges[0]} &micro;C |
+              Q2 = {answerB.capacitorsCharges[1]} &micro;C |
+              Q3 = {answerB.capacitorsCharges[2]} &micro;C |
+              Q4 = {answerB.capacitorsCharges[3]} &micro;C |
+              Q5 = {answerB.capacitorsCharges[4]} &micro;C
+            </h4>
+            <h4>
+              V1 = {answerB.potentialDifference[0]}V |
+              V2 = {answerB.potentialDifference[1]}V |
+              V3 = {answerB.potentialDifference[2]}V |
+              V4 = {answerB.potentialDifference[3]}V |
+              V5 = {answerB.potentialDifference[4]}V 
+            </h4>
           </>
         ) : null }
 
