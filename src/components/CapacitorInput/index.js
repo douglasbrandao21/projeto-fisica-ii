@@ -5,8 +5,8 @@ export default function CapacitorInput({name, value, setValue, max = 150, min = 
   return (
     <FlexColumn>
       <Name>{name}:</Name>
-      <RangeInput type="range" min={min} max={max} step="0.01" value={value} onChange={event => setValue(event.target.value)}/>
-      <InputNumber type="number" value={value} onChange={event => setValue(event.target.value)}/>
+      <RangeInput type="range" min={min} max={max} step="0.01" value={value} onChange={event => setValue(Number(event.target.value))}/>
+      <InputNumber type="number" value={value} onChange={event => setValue(Number(event.target.value))}/>
     </FlexColumn>
   )
 }
