@@ -210,6 +210,15 @@ export default function Index() {
               <p>Q<sub>3</sub> = Q<sub>4</sub> = Q<sub>eq1</sub></p>
               <p>Q<sub>3</sub> = Q<sub>4</sub> = {answerB.equivalentCharge1} &micro;C</p>
             </Step>
+
+            <h3>b) Calcule a carga em cada capacitor e a respectiva diferença de potencial</h3>
+            <h3>
+              Q1 = {answerB.capacitor1Charge} &micro;C |
+              Q2 = {answerB.capacitor2Charge} &micro;C |
+              Q3 = {answerB.capacitor3Charge} &micro;C |
+              Q4 = {answerB.capacitor4Charge} &micro;C |
+              Q5 = {answerB.capacitor5Charge} &micro;C
+            </h3>
           </>
         ) : null }
 
